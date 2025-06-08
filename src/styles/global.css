@@ -1,0 +1,20 @@
+:root {
+    --nb-dark-bg: #223131;
+    --nb-dark-ab: #403C3A;
+    --nb-dark-tx: #ccef90;
+    --nb-dark-li: #62a0ea;
+    --nb-dark-lh: #99c1f1;
+}
+
+body {
+    background-color: var(--nb-dark-bg);
+    color: var(--nb-dark-tx);
+}
+
+a {
+    color: var(--nb-dark-li);
+}
+
+a:hover, a:active {
+    color: var(--nb-dark-lh);
+}
