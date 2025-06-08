@@ -1,0 +1,22 @@
+header {
+    background: var(--nb-dark-ab);
+    display: flex;
+    gap: 3px;
+    flex-direction: row;
+
+    button {
+        padding: 6px;
+        background: transparent;
+        border: none;
+        color: var(--nb-dark-tx);
+
+        &:hover {
+            background-color: var(--nb-dark-bg);
+        }
+    }
+}
+
+section.editor-top {
+    display: flex;
+    flex-direction: row;
+}

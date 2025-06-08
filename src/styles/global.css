@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Inter;
+    src: url(/fonts/Inter-Variable.ttf);
+}
+
 :root {
     --nb-dark-bg: #223131;
     --nb-dark-ab: #403C3A;
@@ -6,9 +11,22 @@
     --nb-dark-lh: #99c1f1;
 }
 
+* {
+    padding: initial;
+    margin: initial;
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--nb-dark-bg);
     color: var(--nb-dark-tx);
+    font-size: 1.15em;
+    font-family: Inter, sans-serif;
+}
+
+button {
+    font-size: 1em;
+    font-family: Inter, sans-serif;
 }
 
 a {
@@ -17,4 +35,21 @@ a {
 
 a:hover, a:active {
     color: var(--nb-dark-lh);
+}
+
+.codemirror-wrapper {
+    font-size: 1.15em;
+}
+
+main:has(section.welcome) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    section.welcome {
+        h1.big {
+            font-size: 3em;
+        }
+    }
 }
