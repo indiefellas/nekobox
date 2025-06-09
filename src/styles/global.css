@@ -9,6 +9,27 @@
     --nb-dark-tx: #ccef90;
     --nb-dark-li: #62a0ea;
     --nb-dark-lh: #99c1f1;
+
+    --almostwhite: #FFF2CC;
+    --cream: #FFF2CC;
+    --orange: #FFC09B;
+    --peach: #FFBBBA;
+    --lightgreen: #FFE1B6;
+    --peachier: #FFBBBA;
+    --orangish: #FFC09B;
+    --creamish: #FFECD6;
+    --pink: #FC949F;
+    --link: #EA8988;
+    --purple: #FC949F;
+    --palegreen: #bbd8bb;
+    --gray: #d5d5d5;
+    --lightbrown: #825044;
+    --darkbrown: #634c53;
+    --cookie: #875f6b;
+    --dough: #FFD0BC;
+    --light-red: #b95c5c;
+    --crazy-green: #95e995;
+    --gradientorange: linear-gradient(#fff2df, #fadabe);
 }
 
 * {
@@ -35,10 +56,6 @@ a {
 
 a:hover, a:active {
     color: var(--nb-dark-lh);
-}
-
-.codemirror-wrapper {
-    font-size: 1.15em;
 }
 
 main:has(section.welcome) {

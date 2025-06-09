@@ -1,22 +1,154 @@
 header {
-    background: var(--nb-dark-ab);
+    background: linear-gradient(to bottom, var(--cookie), var(--darkbrown));
+    color:white;
     display: flex;
-    gap: 3px;
     flex-direction: row;
 
     button {
-        padding: 6px;
+        padding:8px;
+        padding-right: 9px;
         background: transparent;
         border: none;
-        color: var(--nb-dark-tx);
+        text-shadow: 1px 1px black;
+        text-align: center;
+        color: var(--peachier);
+        box-shadow: inset -1px 0px var(--cookie), inset -2px 0px #0008;
 
-        &:hover {
-            background-color: var(--nb-dark-bg);
+        &:hover, &:active, &.active {
+            background-color: rgba(0, 0, 0, 0.192);
         }
     }
 }
 
-section.editor-top {
+div#editor-container {
+    display: grid;
+    grid-template-areas: 
+        "nv"
+        "tp"
+        "cm";
+    height: 100vh;
+}
+
+header#editor-controls {
+    grid-area: nv;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+
+    &>div{
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+    }
+
+    .leftside {
+        box-shadow: inset -1px 0px var(--cookie), inset -2px 0px #0008;
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+}
+
+section#editor-top {
+    display: flex;
+    flex-direction: row;
+    grid-area: tp;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &>div {
+        background: #fff9e6;
+        resize: both;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+
+        #nb-sitebox,
+        #nb-postbox,
+        #nb-followbtn {
+            resize: both;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #nb-followbtn {
+            padding: 12px;
+        }
+
+        #nb-followbtn>button {
+            width: 100%;
+            height: 100%;
+        }
+
+        &.overflow>#nb-sitebox,
+        &.overflow>#nb-postbox {
+            padding: 100px;
+        }
+
+        #nb-settings {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            width: 100%;
+            height:100%;
+        }
+    }
+}
+
+#nb-settings aside {
+    background: var(--cookie);
+
+    button {
+        background: var(--darkbrown);
+        color: var(--peachier);
+        border: 0;
+        text-align: left;
+        padding: 6px;
+        min-width: 100%;
+
+        &:nth-child(2n) {
+            background-color: var(--cookie);
+        }
+
+        &:hover, &:active, &.active {
+            background-color: var(--orange);
+            color: var(--darkbrown);
+        }
+    }
+}
+
+#nb-settings > div {
+    background-color: var(--orange);
+    color: var(--darkbrown);
+    padding: 12px;
+}
+
+section#editor-codemirror {
+    grid-area: cm;
+    overflow-y: auto;
+}
+
+.codemirror-wrapper {
+    font-size: 16px;
+
+    * {
+        font-size: 16px !important;
+    }
+}
+
+/* Hacks so Nekoweb siteboxes will work fine */
+.site-box::before,
+.site-box::after,
+.post-box::before,
+.post-box::after,
+.site-box *::before,
+.site-box *::after,
+.post-box *::before,
+.post-box *::after {
+    content: '';
 }

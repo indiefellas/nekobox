@@ -6,6 +6,8 @@
 	import { onMount } from 'svelte';
 	import { linter, lintGutter, type Diagnostic } from '@codemirror/lint';
 	import { syntaxTree } from '@codemirror/language';
+	import NekowebSitebox from '../../../components/nekoweb-sitebox.svelte';
+	import NekowebPostbox from '../../../components/nekoweb-postbox.svelte';
 
 	if (navigator.storage && navigator.storage.persist) {
 		navigator.storage.persist().then((persistent) => {
@@ -133,13 +135,6 @@
 			const lineStart = view.state.doc.line(line + 1).from;
             const from = lineStart + column;
             const to = Math.min(from + (message.endColumn ? message.endColumn - message.column : 1), view.state.doc.length);
-
-			diagnostics.push({
-				from: from,
-				to: to,
-				message: 'css: ' + message.text,
-				severity: message.severity
-			});
 		}
 		return diagnostics;
 	});
@@ -165,114 +160,110 @@
         });
         return clines.join('\n');
     }
+
+	onMount(() => {
+		document.querySelectorAll('#editor-controls .rightside button').forEach(el => {
+			el.addEventListener('click', () => {
+				document.querySelectorAll('#editor-top > div > div').forEach((e) => {
+					if (e.id == el.dataset.id) {
+						e.style.display = null
+					} else {
+						e.style.display = 'none'
+					}
+				})
+				document.querySelectorAll('#editor-controls .rightside button').forEach(e => {
+					e.classList.remove('active');
+				}) 
+				el.classList.add('active');
+			})
+			
+		})
+
+		document.querySelectorAll('#nb-settings aside button').forEach(el => {
+			el.addEventListener('click', () => {
+				document.querySelectorAll('#nb-settings > div > div').forEach((e) => {
+					if (e.id == el.dataset.id) {
+						e.style.display = null
+					} else {
+						e.style.display = 'none'
+					}
+				})
+				document.querySelectorAll('#nb-settings aside button').forEach(e => {
+					e.classList.remove('active');
+				}) 
+				el.classList.add('active');
+			})
+			
+		})
+	})
 </script>
 
-<section class="editor-top">
-	<div data-display="flex" id="nb-sitebox" class="tabLayout active">
-		<div class="pre-pre-site nekoweb-colors">
-			<div class="pre-site" style="">
-				<div
-					id="site"
-					class="noreset site-box t-classic"
-					style="width:275px!important;height:190px!important;position:relative!important"
-				>
-					<span class="noreset top-dot"></span>
-					<a
-						href="//jbcarreon123.nekoweb.org/"
-						target="_blank"
-						id="NOTUSEDINNEKOWEB_url"
-						rel="noopener ugc"
-						style="position:relative!important"
-					>
-						<div class="noreset sitefeature" style="position:relative!important">
-							<img
-								src="//nekoweb.org/screenshots/jbcarreon123/index_large.jpg"
-								class="screenshot"
-								id="NOTUSEDINNEKOWEB_screenshot"
-								style="position:relative!important"
-								alt="nekoweb sitebox screenshot"
-							/>
-						</div>
-						<p class="noreset" style="position:relative!important">
-							<span id="NOTUSEDINNEKOWEB_siteurl"> jbcarreon123.nekoweb.org </span>
+<div id="editor-container">
+	<header id="editor-controls">
+		<div class="leftside">
+			<button>File</button>
+			<button>Edit</button>
+			<button>Help</button>
+		</div>
+		<div class="rightside">
+			<button class="active" data-id="nb-sitebox">Sitebox</button>
+			<button data-id="nb-postbox">Postbox</button>
+			<button data-id="nb-followbtn">Follow Button</button>
+			<button data-id="nb-settings">Settings</button>
+		</div>
+	</header>
+	<section id="editor-top">
+		<div>
+			<div id="nb-sitebox">
+				<NekowebSitebox/>
+			</div>
+			<div id="nb-postbox" style="display: none;">
+				<NekowebPostbox/>
+			</div>
+			<div id="nb-followbtn" style="display: none;">
+				<button class="follow follow-3926" title="Follow">Follow <span class="on-nekoweb"> on Nekoweb</span></button>
+			</div>
+			<div id="nb-settings" style="display: none;">
+				<aside>
+					<button class="active" data-id="nbs-general">
+						General
+					</button>
+					<button data-id="nbs-elements">
+						Elements
+					</button>
+					<button data-id="nbs-danger">
+						Danger Zone
+					</button>
+					<button data-id="nbs-about">
+						About Nekobox
+					</button>
+				</aside>
+				<div>
+					<div id="nbs-general">
 
-							<span style="position:relative!important" class="noreset follow" title="Follow"
-								>[+]</span
-							>
-						</p>
-						<span
-							class="noreset"
-							style="position:relative!important"
-							id="NOTUSEDINNEKOWEB_sitetitle">site title</span
-						>
-						<br />
-					</a>
-					<span class="noreset bottom-dot"></span>
+					</div>
+					<div id="nbs-elements" style="display: none;">
+						
+					</div>
+					<div id="nbs-danger" style="display: none;">
+						
+					</div>
+					<div id="nbs-about" style="display: none;">
+						<h2>Nekobox2 <span style="font-size: 1rem">2.0.0-alpha1</span></h2>
+						<p>by jbcarreon123 & indiefellas</p>
+						<p>An online Nekoweb elements.css previewer/editor </p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div data-display="flex" id="nb-postbox" class="tabLayout">
-		<div class="pre-pre-post noreset">
-			<div class="pre-post noreset" style="">
-				<a
-					href="/"
-					class="noreset post-link"
-					target="_blank"
-					id="NOTUSEDINNEKOWEB_posturl"
-					rel="noopener ugc"
-					style="position:relative!important"
-				>
-					<div
-						class="noreset post-box t-classic"
-						style="width:100%!important;max-height:400px!important;position:relative!important"
-					>
-						<div class="noreset post-box-inner">
-							<span class="noreset post-top-dot"></span>
-							<span
-								class="noreset post-author"
-								style="position:relative!important"
-								id="NOTUSEDINNEKOWEB_siteusername">jbcarreon123</span
-							>
-							<span class="noreset post-dot" style="position:relative!important">·</span>
-							<span
-								class="noreset post-date"
-								style="position:relative!important"
-								id="NOTUSEDINNEKOWEB_feeddate">5/2/2025</span
-							>
-							<h4
-								class="noreset post-title"
-								style="position:relative!important"
-								id="NOTUSEDINNEKOWEB_feedtitle"
-							>
-								Example post
-							</h4>
-
-							<p
-								class="noreset post-description"
-								style="position:relative!important"
-								id="NOTUSEDINNEKOWEB_feeddesc"
-							>
-								We're starting to formalize flexible opinions around our foundations at the end of
-								the day highlights, and locked and loaded, but organic growth hammer out have
-								bandwidth. The horse is out of the barn how much bandwidth do you have highlights.
-								Corporate synergy we've bootstrapped the model.
-							</p>
-
-							<span class="noreset post-bottom-dot"></span>
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
-<section>
-	<CodeMirror
-		bind:value
-		lang={css()}
-		theme={gruvboxDark}
-		on:change={() => editValue()}
-		extensions={[lintGutter(), regexpLinter, langLinter]}
-	/>
-</section>
+	</section>
+	<section id="editor-codemirror">
+		<CodeMirror
+			bind:value
+			lang={css()}
+			theme={gruvboxDark}
+			on:change={() => editValue()}
+			extensions={[lintGutter(), regexpLinter, langLinter]}
+		/>
+	</section>
+</div>
