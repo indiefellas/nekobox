@@ -9,16 +9,6 @@
 	import NekowebSitebox from '../../../components/nekoweb-sitebox.svelte';
 	import NekowebPostbox from '../../../components/nekoweb-postbox.svelte';
 
-	if (navigator.storage && navigator.storage.persist) {
-		navigator.storage.persist().then((persistent) => {
-			if (persistent) {
-				console.log('Storage will not be cleared except by explicit user action');
-			} else {
-				console.log('Storage may be cleared by the UA under storage pressure.');
-			}
-		});
-	}
-
 	let value = /*css*/ `/* 
     Don't use this file to edit your site style! Create a different CSS file for that.
     This file defines how custom elements (like sitebox) will look like.
@@ -162,6 +152,16 @@
     }
 
 	onMount(() => {
+		if (navigator.storage && navigator.storage.persist) {
+			navigator.storage.persist().then((persistent) => {
+				if (persistent) {
+					console.log('Storage will not be cleared except by explicit user action');
+				} else {
+					console.log('Storage may be cleared by the UA under storage pressure.');
+				}
+			});
+		}
+
 		document.querySelectorAll('#editor-controls .rightside button').forEach(el => {
 			el.addEventListener('click', () => {
 				document.querySelectorAll('#editor-top > div > div').forEach((e) => {
